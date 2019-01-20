@@ -23,6 +23,10 @@
         "route",
         "client",
         "routing",
+        "history",
+        "hash",
+        "switch",
+        "local",
         "hui",
         "3h"
     ],
