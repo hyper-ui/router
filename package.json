@@ -1,0 +1,42 @@
+{
+    "name": "@hyper-ui/router",
+    "description": "Official router for hyper-ui.",
+    "version": "0.1.0",
+    "main": "dist/hyper-ui.router.umd.min.js",
+    "module": "dist/hyper-ui.router.min.js",
+    "types": "index.d.ts",
+    "scripts": {
+        "prebuild": "rd /q /s dist typings raw || exit 0",
+        "build": "tsc && rollup -c",
+        "postbuild": "terser dist/hyper-ui.router.js --config-file terser.json --module -o dist/hyper-ui.router.min.js && terser dist/hyper-ui.router.umd.js --config-file terser.json -o dist/hyper-ui.router.umd.min.js"
+    },
+    "license": "MIT",
+    "author": "3h",
+    "repository": "hyper-ui/router",
+    "bugs": {
+        "url": "https://github.com/hyper-ui/router/issues"
+    },
+    "homepage": "https://github.com/hyper-ui/router#readme",
+    "keywords": [
+        "hyper-ui",
+        "router",
+        "route",
+        "client",
+        "routing",
+        "hui",
+        "3h"
+    ],
+    "files": [
+        "dist",
+        "typings",
+        "index.d.ts"
+    ],
+    "devDependencies": {
+        "@babel/core": "^7.2.2",
+        "@babel/preset-env": "^7.2.3",
+        "rollup": "^1.1.1",
+        "rollup-plugin-babel": "^4.3.2",
+        "terser": "^3.14.1",
+        "typescript": "^3.2.4"
+    }
+}
