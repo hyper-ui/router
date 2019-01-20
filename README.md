@@ -1,6 +1,6 @@
 # @hyper-ui/router
 
-> Official router for [`@hyper-ui/core`](https://github.com/hyper-ui/core).
+> Official router for [hyper-ui](https://github.com/hyper-ui/core).
 
 ## TOC
 
@@ -20,7 +20,7 @@ This is the official router lib for [`@hyper-ui/core`](https://www.npmjs.com/pac
 1. Use npm to install it together with `@hyper-ui/core`:
 
     ```bash
-    npm install @hyper-ui/core @hyper-ui/router
+    npm install @hyper-ui/router @hyper-ui/core
     ```
 
 2. Import the exports of this lib:
@@ -28,7 +28,7 @@ This is the official router lib for [`@hyper-ui/core`](https://www.npmjs.com/pac
     ```js
     // es2015+
     import * as HRouter from "@hyper-ui/router";
-    // or es5
+    // es5
     const HRouter = require("@hyper-ui/router");
     ```
 
@@ -36,7 +36,7 @@ This is the official router lib for [`@hyper-ui/core`](https://www.npmjs.com/pac
 
 ### CDN
 
-1. Put one of the following script tags after the one of `@hyper-ui/core` in your HTML file: (If you want a specified version, just replace latest with that. For more information, visit [www.jsdelivr.com](https://www.jsdelivr.com) or [unpkg.com](https://unpkg.com).)
+1. Put one of the following script tags after the one of `@hyper-ui/core` in your HTML file: (If you want a specified version, just replace `latest` with that. For more information, visit [www.jsdelivr.com](https://www.jsdelivr.com) or [unpkg.com](https://unpkg.com).)
 
     via jsdelivr:
 
