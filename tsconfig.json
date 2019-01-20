@@ -6,6 +6,12 @@
         "declarationDir": "./typings",
         "outDir": "./raw",
         "rootDir": "./src",
+        "baseUrl": "./node_modules",
+        "paths": {
+            "@hyper-ui/core": [
+                "@hyper-ui/core/index"
+            ]
+        },
         "strict": true,
         "noUnusedLocals": true,
         "allowSyntheticDefaultImports": true,
