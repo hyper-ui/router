@@ -36,21 +36,25 @@ This is the official router lib for [`@hyper-ui/core`](https://www.npmjs.com/pac
 
 ### CDN
 
-1. Put one of the following script tags after the one of `@hyper-ui/core` in your HTML file: (If you want a specified version, just replace `latest` with that. For more information, visit [www.jsdelivr.com](https://www.jsdelivr.com) or [unpkg.com](https://unpkg.com).)
+1. Put one of the following script tags after the one of `@hyper-ui/core` in your HTML file:
 
     via jsdelivr:
 
     ```html
-    <script type="text/javascript" crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/@hyper-ui/router@latest"></script>
+    <script type="text/javascript" crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/@hyper-ui/router@latest/dist/hyper-ui.router.umd.min.js"></script>
     ```
 
     or via unpkg:
 
     ```html
-    <script type="text/javascript" crossorigin="anonymous" src="https://unpkg.com/@hyper-ui/router@latest"></script>
+    <script type="text/javascript" crossorigin="anonymous" src="https://unpkg.com/@hyper-ui/router@latest/dist/hyper-ui.router.umd.min.js"></script>
     ```
 
 2. Access the APIs via the `HRouter` global.
+
+If you want a specified version, just replace `latest` with that in the url. By the way, it is recommended to use a specified version in production.
+
+For more information about these two CDN sites, visit [www.jsdelivr.com](https://www.jsdelivr.com) or [unpkg.com](https://unpkg.com).
 
 ## API Reference
 
