@@ -1,19 +1,20 @@
 import rollupPluginBabel from "rollup-plugin-babel";
 
 const input = 'raw/index.js',
-    global = { '@hyper-ui/core': HUI };
+    external = ['@hyper-ui/core'];
 
 export default [
     {
         input,
+        external,
         output: {
             format: 'esm',
-            file: 'dist/hyper-ui.router.js',
-            global
+            file: 'dist/hyper-ui.router.js'
         }
     },
     {
         input,
+        external,
         plugins: [
             rollupPluginBabel()
         ],
@@ -21,7 +22,10 @@ export default [
             format: 'umd',
             name: 'HRouter',
             file: 'dist/hyper-ui.router.umd.js',
-            global
+            globals: {
+                '@hyper-ui/core': 'HUI'
+            },
+            interop: false
         }
     }
 ];
