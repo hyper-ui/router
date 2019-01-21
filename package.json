@@ -8,7 +8,8 @@
     "scripts": {
         "prebuild": "rd /q /s dist typings raw || exit 0",
         "build": "tsc && rollup -c",
-        "postbuild": "terser dist/hyper-ui.router.js --config-file terser.json --module -o dist/hyper-ui.router.min.js && terser dist/hyper-ui.router.umd.js --config-file terser.json -o dist/hyper-ui.router.umd.min.js"
+        "postbuild": "terser dist/hyper-ui.router.js --config-file terser.json --module -o dist/hyper-ui.router.min.js && terser dist/hyper-ui.router.umd.js --config-file terser.json -o dist/hyper-ui.router.umd.min.js",
+        "test": "cd test && tsc"
     },
     "license": "MIT",
     "author": "3h",
@@ -38,13 +39,13 @@
     "devDependencies": {
         "@babel/core": "^7.2.2",
         "@babel/preset-env": "^7.2.3",
-        "@hyper-ui/core": "^0.13.0",
+        "@hyper-ui/core": "^0.13.1",
         "rollup": "^1.1.2",
         "rollup-plugin-babel": "^4.3.2",
         "terser": "^3.14.1",
         "typescript": "^3.2.4"
     },
     "peerDependencies": {
-        "@hyper-ui/core": ">=0.11.0 <1.0.0"
+        "@hyper-ui/core": ">=0.13.1 <1.0.0"
     }
 }
