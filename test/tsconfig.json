@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "none",
+    "jsx": "react",
+    "jsxFactory": "HUI",
+    "outFile": "./index.js",
+    "rootDir": "./src",
+    "strict": true,
+    "baseUrl": "../node_modules",
+    "paths": {
+      "@hyper-ui/core": [
+        "@hyper-ui/core/index"
+      ]
+    },
+    "esModuleInterop": true
+  }
+}
