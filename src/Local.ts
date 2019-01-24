@@ -1,11 +1,11 @@
 import { RouterFactory, RouteListener } from "./create";
-import { dispatchRoute } from "./utils";
+import { dispatchRoute, FAKE_HREF } from "./utils";
 
 export interface LocalRouterOptions {
     start?: string;
 }
 
-export const Local: RouterFactory<LocalRouterOptions> = function LocalRouterFactory(options = {}) {
+export const Local: RouterFactory<LocalRouterOptions> = function LocalRtFactory(options = {}) {
 
     const listeners = new Array<RouteListener>(),
         localPathHistory = [options.start || '/'];
@@ -13,38 +13,42 @@ export const Local: RouterFactory<LocalRouterOptions> = function LocalRouterFact
 
     return {
 
-        getCurrent: function localRouter_getCurrent() {
+        getCurrent: function localRt_getCur() {
             return curPath;
         },
 
-        push: function localRouter_push(path: string) {
+        push: function localRt_push(path: string) {
             if (path !== curPath) {
                 localPathHistory.push(curPath = path);
                 dispatchRoute(listeners, path);
             }
         },
 
-        pop: function localRouter_pop() {
+        pop: function localRt_pop() {
             const historySize = localPathHistory.length;
             if (historySize > 1) {
                 localPathHistory.pop();
-                dispatchRoute(listeners, curPath = localPathHistory[historySize - 1]);
+                dispatchRoute(listeners, curPath = localPathHistory[historySize - 2]);
             }
         },
 
-        getHistorySize: function localRouter_getHistorySize() {
+        getHistorySize: function localRt_getHistSize() {
             return localPathHistory.length;
         },
 
-        addListener: function localRouter_addListener(listener) {
+        addListener: function localRt_addLis(listener) {
             listeners.push(listener);
         },
 
-        removeListener: function localRouter_addListener(listener) {
+        removeListener: function localRt_rmLis(listener) {
             const index = listeners.indexOf(listener);
             if (~index) {
                 listeners.splice(index, 1);
             }
+        },
+
+        format: function localRt_fmt(path) {
+            return FAKE_HREF;
         }
 
     };

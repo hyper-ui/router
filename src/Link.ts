@@ -1,6 +1,6 @@
 import HUI from "@hyper-ui/core";
 import { Router, DEFAULT_NAME } from "./create";
-import { _assign } from "./utils";
+import { _assign, FAKE_HREF } from "./utils";
 
 export type ClickLinkListener = (event: MouseEvent) => unknown;
 
@@ -21,9 +21,13 @@ export interface LinkStore {
 
 export const Link = HUI.define<LinkProps, LinkStore, any, {}, {}>('HRouter.Link', {
 
+    defaultProps: {
+        router: DEFAULT_NAME
+    },
+
     init: function Link_init(props, store, context) {
 
-        const router = context.get(props.router || DEFAULT_NAME) as Router;
+        const router = context.get(props.router!) as Router;
 
         store.set('router', router);
 
@@ -34,9 +38,7 @@ export const Link = HUI.define<LinkProps, LinkStore, any, {}, {}>('HRouter.Link'
         delete anchorProps.router;
         delete anchorProps.back;
 
-        if (props.back) {
-            anchorProps.href = 'javascript:;';
-        }
+        anchorProps.href = props.back ? FAKE_HREF : router.format(props.href!);
 
         anchorProps.onclick = function Link_onclick(event) {
 

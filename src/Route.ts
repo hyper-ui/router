@@ -28,20 +28,24 @@ export const Route = HUI.define<RouteProps, RouteStore, any, RouteStoreHandlers,
 
     state: ['match'],
 
+    defaultProps: {
+        router: DEFAULT_NAME
+    },
+
     init: function Route_init(props, store, context) {
 
         const test: (path: string) => boolean =
             props.pattern ?
-                path => props.pattern.test(path) :
+                path => props.pattern!.test(path) :
                 path => path === props.path;
 
-        const listener: RouteListener = function Route_routeListener(path) {
+        const listener: RouteListener = function Route_rtLis(path) {
             store.set('match', test(path));
         };
 
         store.set('listener', listener);
 
-        const router = context.get(props.router || DEFAULT_NAME) as Router;
+        const router = context.get(props.router!) as Router;
         store.set('router', router);
 
         router.addListener(listener);
@@ -51,16 +55,16 @@ export const Route = HUI.define<RouteProps, RouteStore, any, RouteStoreHandlers,
         store.handle(
             'render',
             props.render ?
-                function Route_renderHandler() { return props.render(store.get('match')!); } :
+                function Route_renderer() { return props.render!(store.get('match')!); } :
                 props.component ?
-                    function Route_renderHandler() { return HUI(props.component); } :
-                    function Route_renderHandler() { return props.children; }
+                    function Route_renderer() { return HUI(props.component!); } :
+                    function Route_renderer() { return props.children; }
         );
 
     },
 
     render: function Route_render(props, store) {
-        return store.trigger('render');
+        return store.get('match') && store.trigger('render');
     },
 
     clear: function Route_clear(props, store) {

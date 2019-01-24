@@ -1,17 +1,20 @@
 import { RouterFactory, RouteListener } from "./create";
 import { dispatchRoute, _location, _window } from "./utils";
 
-export const getPathFromHash = (hash: string) => hash.startsWith('#/') ? hash.slice(1) : '/';
+const HASHBANG_PREFIX = '#!';
 
-const hashPathHistory = [getPathFromHash(_location.hash)];
+export const hash2path = (hash: string) =>
+    hash.startsWith(HASHBANG_PREFIX + '/') ? hash.slice(HASHBANG_PREFIX.length) : '/';
+
+const hashPathHistory = [hash2path(_location.hash)];
 let curHashPath = hashPathHistory[hashPathHistory.length - 1];
 
-export const Hash: RouterFactory<{}> = function HashRouterFactory() {
+export const Hash: RouterFactory<{}> = function HashRtFactory() {
 
     const listeners = new Array<RouteListener>();
 
-    _window.addEventListener('hashchange', function hashRouter_popstateListener() {
-        const path = getPathFromHash(_location.hash);
+    _window.addEventListener('hashchange', function hashRt_onpopstate() {
+        const path = hash2path(_location.hash);
         if (path !== curHashPath) {
             hashPathHistory.push(curHashPath = path);
             dispatchRoute(listeners, path);
@@ -20,35 +23,38 @@ export const Hash: RouterFactory<{}> = function HashRouterFactory() {
 
     return {
 
-        getCurrent: function hashRouter_getCurrent() {
+        getCurrent: function hashRt_getCur() {
             return curHashPath;
         },
 
-        push: function hashRouter_push(path: string) {
-            _location.hash = path;
+        push: function hashRt_push(path: string) {
+            _location.hash = HASHBANG_PREFIX + path;
         },
 
-        pop: function hashRouter_pop() {
-            const historySize = hashPathHistory.length;
-            if (historySize > 1) {
-                _location.hash = hashPathHistory.pop()!;
-                curHashPath = hashPathHistory[historySize - 1];
+        pop: function hashRt_pop() {
+            if (hashPathHistory.length > 1) {
+                hashPathHistory.pop();
+                _location.hash = HASHBANG_PREFIX + hashPathHistory.pop();
             }
         },
 
-        getHistorySize: function hashRouter_getHistorySize() {
+        getHistorySize: function hashRt_getHistSize() {
             return hashPathHistory.length;
         },
 
-        addListener: function hashRouter_addListener(listener) {
+        addListener: function hashRt_addLis(listener) {
             listeners.push(listener);
         },
 
-        removeListener: function hashRouter_addListener(listener) {
+        removeListener: function hashRt_rmLis(listener) {
             const index = listeners.indexOf(listener);
             if (~index) {
                 listeners.splice(index, 1);
             }
+        },
+
+        format: function hashRt_fmt(path) {
+            return _location.href.split('#')[0] + HASHBANG_PREFIX + path;
         }
 
     };

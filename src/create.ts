@@ -9,11 +9,12 @@ export interface Router {
     getHistorySize(): number;
     addListener(listener: RouteListener): void;
     removeListener(listener: RouteListener): void;
+    format(path: string): string;
 }
 
 export type RouterFactory<T> =
     (options?: T) => Router;
 
-export function create<T>(factory: RouterFactory<T>, options?: T): Router {
+export const create = function <T>(factory: RouterFactory<T>, options?: T): Router {
     return factory(options);
 }
