@@ -7,6 +7,7 @@
 - [Introduction](#introduction)
 - [Usage](#usage)
 - [API Reference](#api-reference)
+- [Example](#example)
 - [Links](#links)
 
 ## Introduction
@@ -57,6 +58,121 @@ If you want a specified version, just replace `latest` with that in the url. By 
 For more information about these two CDN sites, visit [www.jsdelivr.com](https://www.jsdelivr.com) or [unpkg.com](https://unpkg.com).
 
 ## API Reference
+
+### HRouter
+
+If you load the UMD module of this lib, an `HRouter` global will contain all the APIs. Otherwise, you use this package as a dependency and import the APIs from it.
+
+### HRouter.create
+
+```ts
+function create(factory: RouterFactory, options?: RouterFactoryOptions): Router;
+```
+
+This is a factory function which accepts the router factory and options for it and returns the router. A router factory should receive the options and return a router instance. Built-in router factories are: [`HRouter.History`](#hrouterhistory), [`HRouter.Hash`](#hrouterhash) and [`HRouter.Local`](#hrouterlocal).
+
+### HRouter.Router
+
+This is just an interface, not a value. Each router should have some universal methods:
+
+#### router.push
+
+```ts
+function push(path: string): void;
+```
+
+This method lets you go to that path.
+
+#### router.pop
+
+```ts
+function pop(): void;
+```
+
+This method lets you go back to previous path if there is one. (Nothing will happen if there is no such one.)
+
+#### router.getCurrent
+
+```ts
+function getCurrent(): string;
+```
+
+This method returns current path.
+
+#### router.getHistorySize
+
+```ts
+function getHistorySize(): number;
+```
+
+This method returns the current size of history.
+
+#### router.addListener
+
+```ts
+function addListener(listener: (path:string) => void): void;
+```
+
+This method enables you to add a listener to the router. The listener will be invoked with every new path.
+
+#### router.removeListener
+
+```ts
+function removeListener(listener: (path:string) => void): void;
+```
+
+This method lets you remove the given listener from the router.
+
+#### router.format
+
+```ts
+function format(path: string): string;
+```
+
+This method receives the original path and returns a formated one.
+
+### HRouter.History
+
+This is a history router factory. A history router uses [History APIs](https://developer.mozilla.org/en-US/docs/Web/API/History) to route.
+
+The only option for a history router is `dropHash` which tells whether to drop the hash while routing. (Default: `false`)
+
+### HRouter.Hash
+
+This is a hash router factory. A hash router uses the hash in url to route. (e.g. `www.example.com/#!/foo/bar`)
+
+### HRouter.Local
+
+This is a local router factory. Each local router has its own state history.
+
+The only option for a local router is `start` which stands for the initial path. (Default: `"/"`)
+
+### HRouter.Link
+
+This is a symbol standing for link components which you can pass as the first argument of `HUI` to create links. A link component is quite like an anchor element except that it uses the specified router in its context to route.
+
+You can use the `router` prop to tell a link the key to the router in its context. (Default: [`HRouter.DEFAULT_NAME`](#hrouterdefault_name))
+
+### HRouter.Route
+
+This is a symbol standing for route components which you can pass as the first argument of `HUI` to create routes. Each route component accepts a `router` prop to specify which router in its context should be used. In addition, it requires a matching prop and a rendering prop.
+
+A matching prop tells when the path matches the route. Available matching props: (sorted by priority)
+
+- `pattern` A regular expression used to test the path.
+- `path` A string used to be compared with the path.
+
+A rendering prop tells what to be rendered according to whether the path matches the route. Available rendering props: (sorted by priority)
+
+- `render` A function receives a boolean and returns what should be rendered. (The boolean will be `true` when the path matches the route.)
+- `component` A symbol standing for the component which should be rendered when the path matches the route.
+- `children` What you want to render when the path matches the route.
+
+### HRouter.DEFAULT_NAME
+
+This is a value which is the default value of `router` props of link components and route components.
+
+## Example
 
 (TBC)
 
