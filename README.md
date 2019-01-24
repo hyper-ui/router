@@ -153,6 +153,8 @@ This is a symbol standing for link components which you can pass as the first ar
 
 You can use the `router` prop to tell a link the key to the router in its context. (Default: [`HRouter.DEFAULT_NAME`](#hrouterdefault_name))
 
+You can also set `back` prop to `true` to let the link point to previous path.
+
 ### HRouter.Route
 
 This is a symbol standing for route components which you can pass as the first argument of `HUI` to create routes. Each route component accepts a `router` prop to specify which router in its context should be used. In addition, it requires a matching prop and a rendering prop.
