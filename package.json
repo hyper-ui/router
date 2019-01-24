@@ -38,13 +38,13 @@
     "devDependencies": {
         "@babel/core": "^7.2.2",
         "@babel/preset-env": "^7.3.1",
-        "@hyper-ui/core": "^0.15.0",
+        "@hyper-ui/core": "^0.15.1",
         "rollup": "^1.1.2",
         "rollup-plugin-babel": "^4.3.2",
         "terser": "^3.14.1",
         "typescript": "^3.2.4"
     },
     "peerDependencies": {
-        "@hyper-ui/core": ">=0.15.0 <1.0.0"
+        "@hyper-ui/core": ">=0.15.1 <1.0.0"
     }
 }
