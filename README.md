@@ -1,6 +1,6 @@
 # @hyper-ui/router
 
-> Official router for [hyper-ui](https://github.com/hyper-ui/core).
+> Official router for [`hyper-ui`](https://github.com/hyper-ui/core).
 
 ## TOC
 
@@ -145,11 +145,11 @@ This is a hash router factory. A hash router uses the hash in url to route. (e.g
 
 This is a local router factory. Each local router has its own state history.
 
-The only option for a local router is `start` which stands for the initial path. (Default: `"/"`)
+The only option for a local router is `start` which stands for the initial state. (Default: `"/"`)
 
 ### HRouter.Link
 
-This is a symbol standing for link components which you can pass as the first argument of `HUI` to create links. A link component is quite like an anchor element except that it uses the specified router in its context to route.
+This is a symbol standing for link components which you can pass to `HUI` as the first argument to create links. A link component is quite like an anchor element except that it uses the specified router in its context to route.
 
 You can use the `router` prop to tell a link the key to the router in its context. (Default: [`HRouter.DEFAULT_NAME`](#hrouterdefault_name))
 
@@ -157,18 +157,20 @@ You can also set `back` prop to `true` to let the link point to previous path.
 
 ### HRouter.Route
 
-This is a symbol standing for route components which you can pass as the first argument of `HUI` to create routes. Each route component accepts a `router` prop to specify which router in its context should be used. In addition, it requires a matching prop and a rendering prop.
+This is a symbol standing for route components which you can pass to `HUI` as the first argument to create routes. Each route component accepts a `router` prop to specify which router in its context should be used. (Default: [`HRouter.DEFAULT_NAME`](#hrouterdefault_name))
+
+In addition, it requires a matching prop and a rendering prop.
 
 A matching prop tells when the path matches the route. Available matching props: (sorted by priority)
 
-- `pattern` A regular expression used to test the path.
-- `path` A string used to be compared with the path.
+- `pattern` - A regular expression used to test the path.
+- `path` - A string used to be compared with the path.
 
 A rendering prop tells what to be rendered according to whether the path matches the route. Available rendering props: (sorted by priority)
 
-- `render` A function receives a boolean and returns what should be rendered. (The boolean will be `true` when the path matches the route.)
-- `component` A symbol standing for the component which should be rendered when the path matches the route.
-- `children` What you want to render when the path matches the route.
+- `render` - A function receives a boolean and returns what should be rendered. (The boolean will be `true` when the path matches the route.)
+- `component` - A symbol standing for the component which should be rendered when the path matches the route.
+- `children` - What you want to render when the path matches the route.
 
 ### HRouter.DEFAULT_NAME
 
