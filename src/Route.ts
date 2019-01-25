@@ -57,14 +57,14 @@ export const Route = HUI.define<RouteProps, RouteStore, any, RouteStoreHandlers,
             props.render ?
                 function Route_renderer() { return props.render!(store.get('match')!); } :
                 props.component ?
-                    function Route_renderer() { return HUI(props.component!); } :
-                    function Route_renderer() { return props.children; }
+                    function Route_renderer() { return store.get('match') && HUI(props.component!); } :
+                    function Route_renderer() { return store.get('match') && props.children; }
         );
 
     },
 
     render: function Route_render(props, store) {
-        return store.get('match') && store.trigger('render');
+        return store.trigger('render');
     },
 
     clear: function Route_clear(props, store) {
