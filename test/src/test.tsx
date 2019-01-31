@@ -28,7 +28,7 @@ interface ShowRouteStore {
     router: HRouter.Router;
     path: string
 }
-const ShowRoute = HUI.define<ShowRouteProps, ShowRouteStore>('ShowRoute', {
+const ShowRoute = HUI.define<ShowRouteProps, HUI.Store<ShowRouteStore>>('ShowRoute', {
 
     state: ['path'],
 

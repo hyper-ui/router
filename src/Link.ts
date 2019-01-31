@@ -4,22 +4,19 @@ import { _assign, FAKE_HREF } from "./utils";
 
 export type ClickLinkListener = (event: MouseEvent) => unknown;
 
-export interface LinkProps {
+export type LinkProps = HUI.EleProps<HTMLAnchorElement> & {
     router?: string;
     onclick?: ClickLinkListener;
     back?: boolean;
     href?: string;
-    ref?: (reference?: HTMLAnchorElement) => void;
-    children?: unknown;
-    [name: string]: unknown;
-}
+};
 
 export interface LinkStore {
     router: Router;
     props: object;
 }
 
-export const Link = HUI.define<LinkProps, LinkStore, any, {}, {}>('HRouter.Link', {
+export const Link = HUI.define<LinkProps, HUI.Store<LinkStore>, HUI.Store<any>>('HRouter.Link', {
 
     defaultProps: {
         router: DEFAULT_NAME
