@@ -1,7 +1,7 @@
 {
     "name": "@hyper-ui/router",
     "description": "Official router for hyper-ui.",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "main": "dist/hyper-ui.router.umd.min.js",
     "module": "dist/hyper-ui.router.min.js",
     "types": "index.d.ts",
